@@ -1,31 +1,50 @@
 #!/bin/bash
 
-SLEEP=30
+# Replace <github_username>, <github_repo>, <api_key>, and <sleep_time> with the actual values
+SLEEP_TIME="<sleep_time>"
+GITHUB_USERNAME="<github_username>"
+GITHUB_REPO="<github_repo>"
 
-# Replace <github_username> and <github_repo> with the actual username and repo name
-GITHUB_URL="https://api.github.com/repos/<github_username>/<github_repo>/commits"
 
-# Get the latest commit ID and store it in a file called "last_commit_id.txt"
-curl -s $GITHUB_URL | grep '"sha":' | head -n 1 | cut -d'"' -f4 > last_commit_id.txt
-echo "Initial commit ID: $(cat last_commit_id.txt)"
+
+GITHUB_URL="https://api.github.com/repos/$GITHUB_USERNAME/$GITHUB_REPO/commits?access_token=$API_KEY"
+
+
+# API_KEY="<api_key>"
+# GITHUB_URL="https://api.github.com/repos/$GITHUB_USERNAME/$GITHUB_REPO/commits?access_token=$API_KEY"
+
+
+
+# Create a file to store the last modified time of the latest commit
+touch last_commit_time.txt
 
 # Loop forever
 while :
 do
-  # Wait for X seconds
-  sleep $SLEEP
+  # Get the last modified time of the latest commit
+  last_commit_time=$(cat last_commit_time.txt)
 
-  # Get the latest commit ID again
-  curl -s $GITHUB_URL | grep '"sha":' | head -n 1 | cut -d'"' -f4 > new_commit_id.txt
+  # Download the latest commits that have been modified since the last time they were checked
+  latest_commits=$(curl -s -z "$last_commit_time" -H "If-Modified-Since: $last_commit_time" "$GITHUB_URL")
 
-  # Compare the new commit ID to the old one
-  if [ "$(cat new_commit_id.txt)" != "$(cat last_commit_id.txt)" ]
+  # Check if there are any new commits
+  if [ "$latest_commits" != "" ]
   then
+    # Extract the latest commit ID and last modified time
+    latest_commit_id=$(echo "$latest_commits" | grep '"sha":' | head -n 1 | cut -d'"' -f4)
+    latest_commit_time=$(echo "$latest_commits" | grep '"date":' | head -n 1 | cut -d'"' -f4)
 
-    echo "NEW COMMIT: $(cat new_commit_id.txt)"
-    # Update the old commit ID with the new one
-    mv new_commit_id.txt last_commit_id.txt
+    # Write the new commit ID and last modified time to disk
+    echo "$latest_commit_id" > last_commit_id.txt
+    echo "$latest_commit_time" > last_commit_time.txt
+
+    # Print the new commit ID
+    echo "NEW COMMIT: $latest_commit_id"
   else
+    # Print a message indicating that there are no new commits
     echo "NO NEW COMMIT."
   fi
+
+  # Wait for the specified sleep time
+  sleep $SLEEP_TIME
 done
