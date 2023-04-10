@@ -1,32 +1,54 @@
+// config_examples.txt
+
+// Search for issues in the 'nostr-protocol/nostr' repository with a specific label
 module.exports = {
-  searchQuery: "user:github"
+searchQuery: "repo:nostr-protocol/nostr label:"good first issue" type:issue"
 }
 
+// Search for open issues in the 'nostr-protocol/nostr' repository
 module.exports = {
-  searchQuery: "repo:octokit/octokit.rb"
+searchQuery: "repo:nostr-protocol/nostr is:open type:issue"
 }
 
+// Search for closed issues in the 'nostr-protocol/nostr' repository
 module.exports = {
-  searchQuery: "topic:nostr"
+searchQuery: "repo:nostr-protocol/nostr is:closed type:issue"
 }
 
+// Search for repositories owned by the 'nostr-protocol' organization with a specific topic
 module.exports = {
-  searchQuery: "topic:nostr language:python"
+searchQuery: "org:nostr-protocol topic:nips"
+}
+
+// Search for repositories owned by the 'nostr-protocol' organization with more than 500 stars
+module.exports = {
+searchQuery: "org:nostr-protocol stars:>500"
+}
+
+// Search for pull requests in the 'nostr-protocol/nostr' repository
+module.exports = {
+searchQuery: "repo:nostr-protocol/nostr type:pr"
+}
+
+// Search for open pull requests in the 'nostr-protocol/nostr' repository
+module.exports = {
+searchQuery: "repo:nostr-protocol/nostr is:open type:pr"
+}
+
+// Search for closed pull requests in the 'nostr-protocol/nostr' repository
+module.exports = {
+searchQuery: "repo:nostr-protocol/nostr is:closed type:pr"
+}
+
+// Search for repositories with the topic 'nostr' and the language 'javascript'
+module.exports = {
+searchQuery: "topic:nostr language:javascript"
+}
+
+// Search for repositories with the topic 'nostr' and more than 100 forks
+module.exports = {
+searchQuery: "topic:nostr forks:>100"
 }
 
 
-module.exports = {
-  searchQuery: "topic:nostr stars:>500"
-}
 
-module.exports = {
-  searchQuery: "topic:nostr forks:>100"
-}
-
-module.exports = {
-  searchQuery: "stars:>1000"
-}
-
-module.exports = {
-  searchQuery: "language:shell"
-}
