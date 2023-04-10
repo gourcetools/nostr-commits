@@ -15,7 +15,7 @@ cd nostr-commits
 Install Ocotkit and fs:
 ```
 npm i fs
-npm i OCtokit
+npm i octokit
 ```
 Open both files to edit them (example command for Sublime Text): <br>
 ```
