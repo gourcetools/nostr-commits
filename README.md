@@ -24,12 +24,11 @@ subl ./src/check.js
 For check.**sh:** edit the variables (PRIVKEY, RELAYS, POW, DELAY)
 For check.**js**, line 5: set a github api key. 
 
-Then edit config.js, you can see examples of configurations in config_examples.txt.
+Then edit config.js with what you want to search for, you can see examples of configurations in config_examples.txt.
 ```
 subl ./config.js
 subl ./config_examples.txt
 ```
-![image](https://user-images.githubusercontent.com/120996278/228252469-dcba5ee8-6052-4b51-a1ef-224c58a8220e.png)
 
 <br>Once you have completed these steps, save the files and run check.sh to start the bot.
 ```
