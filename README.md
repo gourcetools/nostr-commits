@@ -21,16 +21,16 @@ Open both files to edit them (this example command use Sublime Text): <br>
 subl ./src/check.sh
 subl ./src/check.js
 ```
-For check.**sh:** edit the variables (PRIVKEY, RELAYS, POW, DELAY)
-For check.**js**, line 5: set a github api key. 
+### For check.**sh:** edit the variables (PRIVKEY, RELAYS, POW, DELAY) 
+### For check.**js**, line 5: set a github api key. 
+### Edit config.js with what you want to search for, you can see examples of configurations in config_examples.txt.
 
-Then edit config.js with what you want to search for, you can see examples of configurations in config_examples.txt.
 ```
 subl ./config.js
 subl ./config_examples.txt
 ```
 
-<br>Once you have completed these steps, save the files and run check.sh to start the bot.
+<br>Once you have completed these steps, save the changes to theses 3 files and run check.sh to start the bot.
 ```
 ./check.sh
 ```
