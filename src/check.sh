@@ -7,25 +7,24 @@ RELAYFALLBACK="wss://relay.damus.io"
 POW=10
 ASKINTERVAL=30
 
-
+mkdir -p ../data
 
 while true; do
 
 	# Save NOTE to REPOURLOLD variable before checking note, so 
 	# we can compare them later to see if there is a new event id.
  	REPOURLOLD=$REPOURLNEW
-	cp ./COMMIT-ID.txt ./OLD-ID.txt
-	echo " ==  Running check-commits.js ..."
+	cp ../data/COMMIT-ID.txt ../data/OLD-ID.txt
+	echo " ==  Running check.js ..."
 	echo " == ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ⌛ ="
-	# NODE node.js for new commits 
-	node ./check_commits.js 
-		echo " == Done.  ="
+	node ./check.js 
+		echo " == Done... "
 	# Set the outputs of crawl.js as id and pubkey
-	NAME=$(cat ./COMMIT-NAME.txt)
-	REPOTITLE=$(cat ./REPO-TITLE.txt)
-	URL=$(cat ./COMMIT-URL.txt)
-	ID=$(cat ./COMMIT-ID.txt)
-	OLDID=$(cat ./OLD-ID.txt)
+	NAME=$(cat ../data/COMMIT-NAME.txt)
+	REPOTITLE=$(cat ../data/REPO-TITLE.txt)
+	URL=$(cat ../data/COMMIT-URL.txt)
+	ID=$(cat ../data/COMMIT-ID.txt)
+	OLDID=$(cat ../data/OLD-ID.txt)
 	echo " "
 	echo "repo:	$REPOTITLE "
 	echo "commit:	$URL "
@@ -41,10 +40,12 @@ while true; do
 $URL " | tee >(websocat $RELAY) >(websocat $RELAYBIS) >(websocat $RELAYFALLBACK)
 		
 
-		echo " == OK . EVENT ID ABOVE. "
+		echo " == DONE. "
 		echo " "
 		echo " == ⌛Checking again in $ASKINTERVAL seconds..."
 		echo " "
 	fi
 sleep $ASKINTERVAL
 done
+
+

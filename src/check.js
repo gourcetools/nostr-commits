@@ -1,10 +1,8 @@
-// YOU NEED TO SET: LINE 7 GITHUB AUTH TOKEN.
-// YOU NEED TO SET: LINE 26 WHAT YOU ARE LOOKING FOR.
-// Have a nice day.
 const fs = require("fs");
 const { Octokit } = require("@octokit/rest");
+const { searchQuery } = require("../config"); // Import the search query from the config file
 const octokit = new Octokit({
-    auth: "ghp_YOURTOKENHERE"
+    auth: "ghp_GITHUBAPIKEY"
 });
 
 async function main() {
@@ -21,9 +19,8 @@ async function main() {
         await new Promise(resolve => setTimeout(resolve, timeUntilReset));
     }
     // now you can proceed with your API call
-    // CAN BE topic:nostr or       q: 'user:bitcoin-core', for a user. etc...
     const searchResults = await octokit.search.repos({
-        q: "topic:nostr",
+        q: searchQuery, // Use the search query from the config file
         sort: "updated",
         order: "desc"
     });
@@ -41,11 +38,11 @@ async function main() {
     const commitUrl = commit.data.html_url;
 
     // Output the information to files
-    fs.writeFileSync("./REPO-TITLE.txt", repoTitle);
-    fs.writeFileSync("./REPO-URL.txt", repoUrl);
-    fs.writeFileSync("./COMMIT-NAME.txt", commitName);
-    fs.writeFileSync("./COMMIT-ID.txt", commitId);
-    fs.writeFileSync("./COMMIT-URL.txt", commitUrl);
+    fs.writeFileSync("../data//REPO-TITLE.txt", repoTitle);
+    fs.writeFileSync("../data//REPO-URL.txt", repoUrl);
+    fs.writeFileSync("../data//COMMIT-NAME.txt", commitName);
+    fs.writeFileSync("../data//COMMIT-ID.txt", commitId);
+    fs.writeFileSync("../data//COMMIT-URL.txt", commitUrl);
 }
 
 main();

@@ -2,41 +2,43 @@
 Simple shell bot that broadcast nostr events when you update a github repo.
 
 ## Requirements:
-- `nostril` and `websocat` 
-- Node.js with: `Octokit` and `fs` modules.
-- a Github API token
+- `nostril` `websocat`  `node`
+- Github API key
+- A HEX private key to publish with
 
 ## Getting Started <br>
 To get started with Nostr-Commits: clone the repo.
 ```
 git clone https://github.com/gourcetools/nostr-commits
-cd nostr-commits
+cd nostr-commits/src
 ```
 Install Ocotkit and fs:
 ```
-npm i fs
-npm i octokit
+npm i fs octokit
 ```
-Open both files to edit them (example command for Sublime Text): <br>
+Open both files to edit them (this example command use Sublime Text): <br>
 ```
-subl ./check_commits.sh
-subl ./check_commits.js
+subl ./src/check.sh
+subl ./src/check.js
 ```
-**In the shell script:** edit the variables (PRIVKEY, RELAYS, POW, DELAY)
-**In the Python script**, read comments as they will guide you through the setup process. 
+For check.**sh:** edit the variables (PRIVKEY, RELAYS, POW, DELAY)
+For check.**js**, line 5: set a github api key. 
 
+Then edit config.js, you can see examples of configurations in config_examples.txt.
+```
+subl ./config.js
+subl ./config_examples.txt
+```
 ![image](https://user-images.githubusercontent.com/120996278/228252469-dcba5ee8-6052-4b51-a1ef-224c58a8220e.png)
 
-<br>Once you have completed these steps, save the files and run check-commits.sh to start the bot.
+<br>Once you have completed these steps, save the files and run check.sh to start the bot.
 ```
-./check-commits.sh
+./check.sh
 ```
 
-The bot should be running, you can look at the console for informations about wha't going on.
+The bot should be running in loop, you can look at the console for informations about what is going on.
 
 ![image](https://user-images.githubusercontent.com/120996278/228253457-bf2c9d17-8b9c-4bc2-ae04-506e9c677042.png)
-
-
 
 
 ## 🙋‍♂️ Need help? <br> 

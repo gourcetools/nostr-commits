@@ -1,0 +1,32 @@
+module.exports = {
+  searchQuery: "user:github"
+}
+
+module.exports = {
+  searchQuery: "repo:octokit/octokit.rb"
+}
+
+module.exports = {
+  searchQuery: "topic:nostr"
+}
+
+module.exports = {
+  searchQuery: "topic:nostr language:python"
+}
+
+
+module.exports = {
+  searchQuery: "topic:nostr stars:>500"
+}
+
+module.exports = {
+  searchQuery: "topic:nostr forks:>100"
+}
+
+module.exports = {
+  searchQuery: "stars:>1000"
+}
+
+module.exports = {
+  searchQuery: "language:shell"
+}
